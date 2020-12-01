@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
 
-// Brute-force algorithm for AoC 2020 (1) part 1 and learning Rust by experimenting
+// Brute-force algorithm for AoC 2020 (1) part 2 and learning Rust by experimenting
 fn main() {
 
     let mut values: Vec<u32> = Vec::new();
@@ -15,17 +15,21 @@ fn main() {
     }
     let mut a: u32 = 0;
     let mut b: u32 = 0;
+    let mut c: u32 = 0;
     for val1 in &values {
         for val2 in &values {
-            if val1 + val2 == 2020 && a == 0
-            {
-                a = *val1;
-                b = *val2;
-                break;
+            for val3 in &values {
+                if val1 + val2 + val3 == 2020 && a == 0
+                {
+                    a = *val1;
+                    b = *val2;
+                    c = *val3;
+                    break;
+                }
             }
         }
     }
-    println!("{}", a * b);
+    println!("{}", a * b * c);
 }
 
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
